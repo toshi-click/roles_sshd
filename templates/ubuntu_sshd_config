@@ -36,7 +36,7 @@ PermitRootLogin {{ sshd_permit_root_login }}
 #PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
-#AuthorizedKeysFile    .ssh/authorized_keys .ssh/authorized_keys2
+#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
 
 #AuthorizedPrincipalsFile none
 
@@ -110,14 +110,14 @@ PrintMotd no
 AcceptEnv LANG LC_*
 
 # override default of no subsystems
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem       sftp    /usr/lib/openssh/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
-#      X11Forwarding no
-#      AllowTcpForwarding no
-#      PermitTTY no
-#      ForceCommand cvs server
+#       X11Forwarding no
+#       AllowTcpForwarding no
+#       PermitTTY no
+#       ForceCommand cvs server
 
 {% if sshd_permit_user != '' %}
     AllowUsers {{ sshd_permit_user }}
