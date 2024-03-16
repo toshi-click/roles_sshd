@@ -1,10 +1,9 @@
 ---
-- name: open ssh server install
-  apt:
-    name: openssh-server
-    update_cache: yes
-    cache_valid_time: 3600
-
+- name: Install open ssh server
+  ansible.builtin.package:
+    name:
+      - openssh-server
+    state: present
 # sshd
 - name: sshd is configured
   notify:
