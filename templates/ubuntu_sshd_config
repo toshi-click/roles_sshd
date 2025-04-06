@@ -21,6 +21,12 @@ Include /etc/ssh/sshd_config.d/*.conf
 # Ciphers and keying
 #RekeyLimit default none
 
+# セキュリティ強化: 脆弱な鍵交換方式を無効化
+KexAlgorithms -diffie-hellman-group14-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521
+
+# セキュリティ強化: 脆弱なMAC方式を無効化
+MACs -hmac-sha1,hmac-sha1-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,umac-64@openssh.com,umac-64-etm@openssh.com,umac-128@openssh.com
+
 # Logging
 #SyslogFacility AUTH
 #LogLevel INFO
@@ -33,7 +39,7 @@ PermitRootLogin {{ sshd_permit_root_login }}
 #MaxAuthTries 6
 #MaxSessions 10
 
-#PubkeyAuthentication yes
+PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
 #AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
@@ -53,6 +59,7 @@ PermitRootLogin {{ sshd_permit_root_login }}
 
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication {{ sshd_password_login }}
+ChallengeResponseAuthentication no
 #PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
